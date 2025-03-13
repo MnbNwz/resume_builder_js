@@ -1,47 +1,20 @@
-import { useForm, useFieldArray, useWatch } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField, Button } from "../../atoms/index";
 import { DateRange } from "../../molecules";
-import { workExperienceSchema } from "../../../utils/types/formTypes";
 import { APP_CONSTANTS } from "../../../constants/app-constants";
 import { FaPlus, FaRegTrashAlt } from "react-icons/fa";
 import { memo } from "react";
 
-const defaultValues = {
-  companyName: "",
-  jobTitle: "",
-  startDate: "mm/dd/yyyy",
-  endDate: "mm/dd/yyyy",
-  location: "",
-  contributions: [{ value: "" }],
-};
-
-export const WorkExperienceForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    control,
-  } = useForm({
-    resolver: zodResolver(workExperienceSchema),
-    defaultValues,
-  });
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "contributions",
-  });
-
-  const isEndDateDisabled = watch("disabledEndDate");
-
-  const onSubmit = () => console.log(data);
-
-  const lastFieldValue = useWatch({
-    control,
-    name: `contributions.${fields.length - 1}.value`,
-  });
-
+export const WorkExperienceForm = ({
+  register,
+  errors,
+  control,
+  fields,
+  append,
+  remove,
+  watch,
+  lastFieldValue,
+  isEndDateDisabled,
+}) => {
   const ContributionField = memo(({ index, isLast }) => {
     return (
       <div>
@@ -53,7 +26,7 @@ export const WorkExperienceForm = () => {
               label=""
               name={`contributions.${index}.value`}
               register={register}
-              error={errors.contributions?.[index]?.value}
+              error={errors?.contributions?.[index]?.value}
               placeholder="Describe a contribution..."
             />
           </div>
@@ -63,9 +36,7 @@ export const WorkExperienceForm = () => {
               onClick={() => remove(index)}
               className="!bg-transparent !text-black h-10 w-10 flex items-center justify-center"
             >
-              <span className="flex items-center justify-center">
-                <FaRegTrashAlt size={18} className="text-black" />
-              </span>
+              <FaRegTrashAlt size={18} className="text-black" />
             </Button>
           )}
         </div>
@@ -77,55 +48,56 @@ export const WorkExperienceForm = () => {
   });
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className=" space-y-4 p-4 rounded-md border border-gray-300"
-    >
-      <InputField
-        important={true}
-        label="Company Name"
-        name="companyName"
-        register={register}
-        error={errors.companyName}
-        placeholder="e.g., Acme Corporation"
-      />
+    <div className="flex flex-col space-y-4 p-4 rounded-md border border-gray-300">
+      <div className="flex flex-col space-y-4 p-4 rounded-md border border-gray-300 h-full  overflow-y-auto">
+        <InputField
+          important={true}
+          label="Company Name"
+          name="companyName"
+          register={register}
+          error={errors?.companyName}
+          placeholder="e.g., Acme Corporation"
+        />
 
-      <InputField
-        important={true}
-        label="Job Title"
-        name="jobTitle"
-        register={register}
-        error={errors.jobTitle}
-        placeholder="e.g., Senior Software Engineer"
-      />
+        <InputField
+          important={true}
+          label="Job Title"
+          name="jobTitle"
+          register={register}
+          error={errors?.jobTitle}
+          placeholder="e.g., Senior Software Engineer"
+        />
 
-      <DateRange
-        register={register}
-        errors={errors}
-        isEndDateDisabled={isEndDateDisabled}
-      />
+        <DateRange
+          register={register}
+          errors={errors}
+          isEndDateDisabled={isEndDateDisabled}
+        />
 
-      <InputField
-        important={false}
-        label="Location"
-        name="location"
-        register={register}
-        error={errors.location}
-        placeholder="e.g., San Francisco CA or remote"
-      />
+        <InputField
+          important={false}
+          label="Location"
+          name="location"
+          register={register}
+          error={errors?.location}
+          placeholder="e.g., San Francisco CA or remote"
+        />
 
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700">
-          {APP_CONSTANTS.contributions}
-        </label>
-        {fields.map((_, index) => (
-          <ContributionField
-            key={index}
-            isLast={fields.length - 1 === index}
-            index={index}
-          />
-        ))}
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-gray-700">
+            {APP_CONSTANTS.contributions}
+          </label>
+          {fields.map((_, index) => (
+            <ContributionField
+              key={index}
+              isLast={fields.length - 1 === index}
+              index={index}
+            />
+          ))}
+        </div>
+      </div>
 
+      <div className="bg-white mb-12">
         <Button
           type="button"
           onClick={() => {
@@ -133,25 +105,18 @@ export const WorkExperienceForm = () => {
               append({ value: "" });
             }
           }}
-          styleDate="!bg-white !text-black rounded-md !border !border-gray-300 w-50"
+          className="!bg-white !text-black rounded-md !border !border-gray-300 gap-2 flex justify-between items-center"
         >
-          <span className="flex items-center justify-center gap-2">
-            <FaPlus size={15} /> Add Contribution
-          </span>
+          <FaPlus size={15} />
+          {APP_CONSTANTS.addContribution}
         </Button>
       </div>
 
-      <div className="flex justify-between items-center gap-4">
-        <Button
-          styleDate="w-full !bg-white !text-black rounded-md py-2 px-4 !border !border-gray-300"
-          type="submit"
-        >
-          <span className="flex items-center justify-center gap-2">
-            <FaPlus size={15} />
-            {APP_CONSTANTS.addWorkExperience}
-          </span>
-        </Button>
+      <div className="w-full flex  justify-center ">
+        <button className="w-2xl" type="submit">
+          {APP_CONSTANTS.submit}
+        </button>
       </div>
-    </form>
+    </div>
   );
 };

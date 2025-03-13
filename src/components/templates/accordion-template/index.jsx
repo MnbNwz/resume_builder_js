@@ -8,16 +8,18 @@ export const AccordionTemplate = ({ title, children }) => {
 
   useEffect(() => {
     if (contentRef.current) {
-      setHeight(isOpen ? `${contentRef.current.scrollHeight}px` : "0px");
+      const scrollHeight = contentRef.current.scrollHeight;
+      setHeight(isOpen ? `${scrollHeight}px` : "0px");
     }
-  }, [isOpen]);
+  }, [isOpen, children]); // Recalculate height if children content changes
 
   const toggleAccordion = () => {
     setIsOpen((prev) => !prev);
   };
 
   return (
-    <div className="bg-white border border-gray-300 rounded-md overflow-hidden">
+    <div className="bg-white border border-gray-300 rounded-md mb-4">
+      {/* Accordion Header */}
       <div
         className="p-4 flex justify-between items-center cursor-pointer"
         onClick={toggleAccordion}
@@ -30,11 +32,12 @@ export const AccordionTemplate = ({ title, children }) => {
         />
       </div>
 
+      {/* Animated Content */}
       <div
         ref={contentRef}
         className="transition-all duration-500 ease-in-out"
         style={{
-          maxHeight: height,
+          maxHeight: isOpen ? height : "0px",
           opacity: isOpen ? 1 : 0,
           visibility: isOpen ? "visible" : "hidden",
         }}

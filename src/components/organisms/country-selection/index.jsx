@@ -41,7 +41,7 @@ export const CountryFlagDropdown = () => {
 
       {/* Dropdown menu */}
       {isDropdownVisible && (
-        <ul className="absolute w-38 bg-white border z-[9999] border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+        <ul className="absolute w-38 bg-white border z-[9999] border-gray-300 rounded-md shadow-lg overflow-auto">
           {Countries.map((country) => (
             <li
               key={country.code}

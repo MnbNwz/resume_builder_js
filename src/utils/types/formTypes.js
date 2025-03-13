@@ -65,12 +65,3 @@ export const PersonalInformationSchema = z.object({
   linkedIn: urlValidation, // Custom URL validation for LinkedIn
   website: urlValidation, // Custom URL validation for website
 });
-
-// // Type inference for form data based on schemas
-// export type WorkExperienceFormData = z.infer<typeof workExperienceSchema>; // Inferred type for work experience form data
-// export type ProfessionalSummaryFormData = z.infer<
-//   typeof professionalSummarySchema
-// >; // Inferred type for professional summary form data
-// export type PersonalInformationFormData = z.infer<
-//   typeof PersonalInformationSchema
-// >; // Inferred type for personal information form data

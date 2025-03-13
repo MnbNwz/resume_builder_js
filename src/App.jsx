@@ -6,7 +6,10 @@ import MainForm from "./components/pages/MainForm";
 function App() {
   return (
     <ResumeProvider>
-      <div className="w-screen h-screen overflow-x-hidden space-y-4 p-4">
+      <div
+        style={{ height: "100%" }}
+        className="w-screen  overflow-x-hidden space-y-4 p-4"
+      >
         <MainForm />
       </div>
     </ResumeProvider>
@@ -15,7 +18,7 @@ function App() {
 
 export default App;
 
-const ResumeContext = createContext();
+export const ResumeContext = createContext();
 
 const ResumeProvider = ({ children }) => {
   const [resumeData, setResumeData] = useState([]);
