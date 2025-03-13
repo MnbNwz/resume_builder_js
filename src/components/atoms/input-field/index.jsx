@@ -13,6 +13,7 @@ export const InputField = ({
   disabled = false,
   countryFlag = false,
   disabledError = false,
+  onChange,
 }) => {
   return (
     <div className="flex-1 relative">
@@ -30,6 +31,7 @@ export const InputField = ({
             className={`border border-gray-300 p-2 w-full text-black text-sm placeholder-gray-400 pr-10 rounded-md focus:border-black focus:outline-none focus:ring-1 focus:ring-gray-400 transition duration-150 ${
               disabled ? "!bg-gray-300 opacity-50 cursor-not-allowed" : ""
             }`}
+            onChange={(e) => onChange && onChange(e)}
           />
         </div>
 

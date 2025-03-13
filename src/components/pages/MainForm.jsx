@@ -24,18 +24,15 @@ const defaultValues = {
   location: "",
   linkedIn: "",
   website: "",
-
   // Professional Summary section
   summary: "",
-  skills: "",
-
   // Work Experience section
   companyName: "",
   jobTitle: "",
   startDate: "mm/dd/yyyy",
   endDate: "mm/dd/yyyy",
-  location: "",
-  contributions: [{ value: "" }],
+  contributions: [],
+  disabledEndDate: false,
 };
 
 const combinedSchema = PersonalInformationSchema.merge(
@@ -43,13 +40,15 @@ const combinedSchema = PersonalInformationSchema.merge(
 ).merge(workExperienceSchema);
 
 const MainForm = () => {
-  // Initialize useForm with Zod validation and default values
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
+    getValues,
+    setValue,
     watch,
+    trigger,
   } = useForm({
     resolver: zodResolver(combinedSchema),
     defaultValues,
@@ -60,14 +59,14 @@ const MainForm = () => {
     name: "contributions",
   });
 
+  const handleChange = (value, index) => {
+    setValue(`contributions.${index}.value`, value, {
+      shouldValidate: true,
+    });
+  };
+
   const isEndDateDisabled = watch("disabledEndDate");
 
-  const lastFieldValue = useWatch({
-    control,
-    name: `contributions.${fields.length - 1}.value`,
-  });
-
-  // Submit handler
   const onSubmit = (data) => {
     console.log("Form Submitted:", data);
   };
@@ -88,9 +87,11 @@ const MainForm = () => {
           fields={fields}
           append={append}
           remove={remove}
-          watch={watch}
-          lastFieldValue={lastFieldValue}
           isEndDateDisabled={isEndDateDisabled}
+          getValues={getValues}
+          trigger={trigger}
+          setValue={setValue}
+          handleChange={handleChange}
         />
       </AccordionTemplate>
     </form>

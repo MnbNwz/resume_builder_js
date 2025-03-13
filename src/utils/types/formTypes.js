@@ -19,10 +19,14 @@ export const workExperienceSchema = z.object({
   contributions: z
     .array(
       z.object({
-        value: z.string(), // Validates individual contribution value (string)
+        value: z.string().min(8, "Contribution must be at least 8 characters"),
       })
     )
-    .optional(), // Contributions are optional (array of objects)
+    .min(1, "At least one contribution is required"),
+  contributionInput: z
+    .string()
+    .min(8, "Contribution must be at least 8 characters")
+    .optional(),
   disabledEndDate: z.boolean().optional(), // Optionally disables end date
 });
 
