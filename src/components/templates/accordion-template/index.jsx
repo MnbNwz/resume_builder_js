@@ -1,38 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaChevronUp } from "react-icons/fa";
 
-// FormTemplate component with collapsible accordion functionality
 export const AccordionTemplate = ({ title, children }) => {
-  const [isOpen, setIsOpen] = useState(true); // State to track whether accordion is open or closed
+  const [isOpen, setIsOpen] = useState(true);
+  const contentRef = useRef(null);
+  const [height, setHeight] = useState("0px");
 
-  // Toggles the accordion open/close state
-  const toggleAccordion = () => setIsOpen((prev) => !prev);
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(isOpen ? `${contentRef.current.scrollHeight}px` : "0px");
+    }
+  }, [isOpen]);
+
+  const toggleAccordion = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   return (
-    <div className="w-full bg-white">
-      <div className="p-4 rounded-md border border-gray-300">
-        {/* Accordion header — click to toggle open/close */}
-        <div
-          className="flex justify-between items-center cursor-pointer"
-          onClick={toggleAccordion}
-        >
-          <p className="text-sm font-medium text-gray-700">{title}</p>
-
-          {/* Chevron icon rotates based on isOpen state */}
-          <FaChevronUp
-            className="text-gray-600"
-            style={{ transform: `rotate(${isOpen ? 180 : 0}deg)` }}
-          />
-        </div>
-
-        {/* Accordion body — expands or collapses based on isOpen */}
-        <div
-          className={`overflow-hidden transition-all duration-500 ease-in-out ${
-            isOpen ? "max-h-screen mt-4" : "max-h-0"
+    <div className="bg-white border border-gray-300 rounded-md overflow-hidden">
+      <div
+        className="p-4 flex justify-between items-center cursor-pointer"
+        onClick={toggleAccordion}
+      >
+        <p className="text-sm font-medium text-gray-700">{title}</p>
+        <FaChevronUp
+          className={`text-gray-600 transform transition-transform duration-300 ${
+            isOpen ? "rotate-180" : "rotate-0"
           }`}
-        >
-          {isOpen && <div>{children}</div>}
-        </div>
+        />
+      </div>
+
+      <div
+        ref={contentRef}
+        className="transition-all duration-500 ease-in-out"
+        style={{
+          maxHeight: height,
+          opacity: isOpen ? 1 : 0,
+          visibility: isOpen ? "visible" : "hidden",
+        }}
+      >
+        <div className="p-4">{children}</div>
       </div>
     </div>
   );
