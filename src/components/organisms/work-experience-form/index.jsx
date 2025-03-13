@@ -86,6 +86,11 @@ export const WorkExperienceForm = ({
                       disabled={false}
                       onChange={(e) => handleChange(e.target.value, index)}
                     />
+                    {errors?.contributions?.[index]?.value && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.contributions[index].value.message}
+                      </p>
+                    )}
                   </div>
 
                   <div
