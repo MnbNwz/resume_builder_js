@@ -52,7 +52,7 @@ export const PersonalInformationSchema = z.object({
     .max(100, "Location cannot exceed 100 characters.")
     .or(z.literal("")) // Allows an empty string as a valid value
     .optional(),
-  number: z
+  phoneNumber: z
     .string()
     .regex(
       /^\+?[1-9]\d{1,14}$/, // Validates international phone number format (optional + and up to 15 digits)

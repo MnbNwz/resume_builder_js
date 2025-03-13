@@ -24,7 +24,7 @@ export const PersonalInformationForm = () => {
     defaultValues,
   });
 
-  const onSubmit = () => console.log(data);
+  const onSubmit = () => console.log("data");
 
   return (
     <form
@@ -70,9 +70,9 @@ export const PersonalInformationForm = () => {
       <InputField
         countryFlag={true}
         label="Phone Number"
-        name="number"
+        name="phoneNumber" // ✅ Ensure this exactly matches the schema
         register={register}
-        error={errors.number}
+        error={errors?.phoneNumber} // ✅ Optional chaining avoids runtime errors
         placeholder="000 000 0000"
       />
 
