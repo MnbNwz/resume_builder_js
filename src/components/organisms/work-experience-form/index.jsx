@@ -12,19 +12,19 @@ export const WorkExperienceForm = ({
   append,
   remove,
   trigger,
-  isEndDateDisabled,
+  watch,
   getValues,
   setValue,
   handleChange,
 }) => {
   const fieldArrayFields = useMemo(() => fields, [fields]);
+  const isEndDateDisabled = watch("disabledEndDate");
 
   const validateContributionInput = async () => {
     const result = await trigger("contributionInput");
     if (result) {
       const contributionText = getValues("contributionInput");
       append({ value: contributionText });
-
       setValue("contributionInput", "");
     } else {
       console.log("Contribution Input validation failed");
@@ -77,10 +77,11 @@ export const WorkExperienceForm = ({
               <div key={index}>
                 <div className="flex items-center w-full">
                   <div className="flex-1">
-                    <input
+                    <InputField
                       {...register(`contributions.${index}.value`)}
                       important={false}
                       name={`contributions.${index}.value`}
+                      register={register}
                       placeholder="Describe a contribution..."
                       className="border border-gray-300 p-2 w-full text-black text-sm placeholder-gray-400 pr-10 rounded-md focus:border-black focus:outline-none focus:ring-1 focus:ring-gray-400 transition duration-150"
                       disabled={false}
@@ -97,7 +98,10 @@ export const WorkExperienceForm = ({
                     onClick={() => remove(index)}
                     className="!bg-transparent !text-black h-10 w-10 flex items-center justify-center cursor-pointer hover:bg-gray-200 rounded-full"
                   >
-                    <FaRegTrashAlt size={18} className="text-black" />
+                    <FaRegTrashAlt
+                      size={18}
+                      className="text-black mx-auto my-auto"
+                    />
                   </div>
                 </div>
               </div>

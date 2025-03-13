@@ -63,9 +63,8 @@ const MainForm = () => {
     setValue(`contributions.${index}.value`, value, {
       shouldValidate: true,
     });
+    // console.log(getValues("contributions"));
   };
-
-  const isEndDateDisabled = watch("disabledEndDate");
 
   const onSubmit = (data) => {
     console.log("Form Submitted:", data);
@@ -87,9 +86,9 @@ const MainForm = () => {
           fields={fields}
           append={append}
           remove={remove}
-          isEndDateDisabled={isEndDateDisabled}
           getValues={getValues}
           trigger={trigger}
+          watch={watch}
           setValue={setValue}
           handleChange={handleChange}
         />
