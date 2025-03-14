@@ -33,7 +33,7 @@ export const workExperienceSchema = z.object({
 
 // Professional Summary Schema Validation
 export const professionalSummarySchema = z.object({
-  summary: z.string().min(20, "Valid Summa is required"), // Ensures summary is at least 20 characters long
+  summary: z.string().min(20, "Valid Summary is required"), // Ensures summary is at least 20 characters long
 });
 
 // Personal Information Schema Validation

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { APP_CONSTANTS } from "../../constants/app-constants";
 import { AccordionTemplate } from "../templates";
@@ -16,6 +16,7 @@ import {
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ResumeContext } from "../../App";
 
 const defaultValues = {
   // Personal Information section
@@ -41,6 +42,8 @@ const combinedSchema = PersonalInformationSchema.merge(
 ).merge(workExperienceSchema);
 
 const MainForm = () => {
+  const { resumeData, setResumeData } = useContext(ResumeContext);
+
   const {
     register,
     handleSubmit,
@@ -50,6 +53,7 @@ const MainForm = () => {
     setValue,
     watch,
     trigger,
+    reset,
   } = useForm({
     resolver: zodResolver(combinedSchema),
     defaultValues,
@@ -71,6 +75,8 @@ const MainForm = () => {
 
   const onSubmit = (data) => {
     console.log("Form Submitted:", data);
+    setResumeData((prev) => [...prev, data]);
+    reset();
   };
 
   const onError = (errors) => {

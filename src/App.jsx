@@ -23,6 +23,8 @@ export const ResumeContext = createContext();
 const ResumeProvider = ({ children }) => {
   const [resumeData, setResumeData] = useState([]);
 
+  console.log(resumeData);
+
   return (
     <ResumeContext.Provider value={{ resumeData, setResumeData }}>
       {children}
