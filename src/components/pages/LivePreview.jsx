@@ -1,20 +1,31 @@
 import { useEffect, useState } from "react";
 
 function LivePreview({ methods }) {
-  const [values, setValues] = useState(methods.getValues()); // Initialize with current form values
+  const [values, setValues] = useState(methods.getValues()); // Initial form values
 
   useEffect(() => {
     const subscription = methods.watch((updatedValues) => {
-      setValues(updatedValues); // Update state when form changes
+      setValues((prevValues) => {
+        if (JSON.stringify(prevValues) !== JSON.stringify(updatedValues)) {
+          return updatedValues; // Update only if values have changed
+        }
+        return prevValues; // No change, keep current state
+      });
     });
 
     const interval = setInterval(() => {
-      setValues(methods.getValues()); // Update values every second
+      setValues((prevValues) => {
+        const currentValues = methods.getValues();
+        if (JSON.stringify(prevValues) !== JSON.stringify(currentValues)) {
+          return currentValues; // Update only if values differ
+        }
+        return prevValues;
+      });
     }, 1000);
 
     return () => {
       subscription.unsubscribe();
-      clearInterval(interval); // Clean up both subscription and interval
+      clearInterval(interval);
     };
   }, [methods]);
 
