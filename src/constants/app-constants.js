@@ -1,14 +1,12 @@
 export const APP_CONSTANTS = {
-  workExperience: "Work Experience",
+  workExperience: "New Work Experience",
   professionalSummary: "Professional Summary",
   personalInformation: "Personal Information",
-  // iCurrentlyWorkHere: "I currently work here",
   contributions: "Contributions",
   addContribution: "Add Contribution",
   submit: "Submit",
   addWorkExperienceButton: "Add Work Experience",
-
-  addWorkExperience: "Add WorkExperience",
+  addWorkExperience: "Saved Work Experience",
 };
 export const FORM_REGISTER_CONSTANTS = {
   startDate: {

@@ -98,7 +98,7 @@ function App() {
   const methods = useForm({
     resolver: zodResolver(combinedSchema),
     defaultValues,
-    mode: "all",
+    mode: "onChange",
   });
   // const formValues = methods.watch();
 
@@ -113,7 +113,7 @@ function App() {
       </div>
 
       <div className=" p-4 overflow-x-hidden">
-        {/* <LivePreview methods={methods} /> */}
+        <LivePreview methods={methods} />
       </div>
     </div>
   );

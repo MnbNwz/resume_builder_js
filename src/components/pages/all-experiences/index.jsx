@@ -10,7 +10,7 @@ export const AllExperiencePage = ({ workExperienceForms }) => {
     <AccordionTemplate
       key={key}
       defaultAccordionOff={true}
-      title={`${APP_CONSTANTS.workExperience} ${Number(key) + 1}`}
+      title={`${APP_CONSTANTS.addWorkExperience} ${Number(key) + 1}`}
     >
       <MiniWorkExperienceForm defaultValues={value} />
     </AccordionTemplate>

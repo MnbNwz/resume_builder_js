@@ -54,7 +54,7 @@ export const MiniWorkExperienceForm = ({ defaultValues }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col space-y-4 p-4"
+      className="flex flex-col space-y-4 px-4"
     >
       <InputField
         important={true}
@@ -127,7 +127,10 @@ export const MiniWorkExperienceForm = ({ defaultValues }) => {
           ))}
       </div>
 
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
+      <button
+        type="submit"
+        className="bg-blue-500 text-white p-2 mt-10 rounded-md"
+      >
         Submit
       </button>
     </form>
