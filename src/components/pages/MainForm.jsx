@@ -13,29 +13,9 @@ import {
   professionalSummarySchema,
   workExperienceSchema,
 } from "../../utils/types/formTypes";
-import { useForm, useFieldArray, useWatch } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ResumeContext } from "../../App";
+import { useFieldArray, useFormContext } from "react-hook-form";
 
-const defaultValues = {
-  // Personal Information section
-  fullName: "",
-  email: "",
-  headline: "",
-  location: "",
-  linkedIn: "",
-  website: "",
-  // Professional Summary section
-  summary: "",
-  // Work Experience section
-  companyName: "",
-  jobTitle: "",
-  startDate: "mm/dd/yyyy",
-  endDate: "mm/dd/yyyy",
-  contributions: [],
-  disabledEndDate: false,
-};
+import { ResumeContext } from "../../App";
 
 const combinedSchema = PersonalInformationSchema.merge(
   professionalSummarySchema
@@ -54,11 +34,7 @@ const MainForm = () => {
     watch,
     trigger,
     reset,
-  } = useForm({
-    resolver: zodResolver(combinedSchema),
-    defaultValues,
-    mode: "onChange",
-  });
+  } = useFormContext();
 
   const isEndDateDisabled = watch("disabledEndDate");
   const { fields, append, remove } = useFieldArray({

@@ -15,7 +15,7 @@ export const workExperienceSchema = z.object({
     .min(1, "End Date is required") // Ensures end date is provided
     .refine((date) => formatDate(date), "Invalid End Date") // Custom date validation
     .transform((date) => formatDate(date)), // Transforms end date into the correct format
-  location: z.string().optional(), // Location is optional
+  officeLocation: z.string().optional(), // Location is optional
   contributions: z
     .array(
       z.object({
@@ -38,10 +38,7 @@ export const professionalSummarySchema = z.object({
 
 // Personal Information Schema Validation
 export const PersonalInformationSchema = z.object({
-  fullName: z
-    .string()
-    .min(3, "Full name must be at least 3 characters long.") // Ensures full name is between 3 and 50 characters
-    .max(50, "Full name cannot exceed 50 characters."),
+  fullName: z.string().min(3, "Full name must be at least 8 characters long."), // Ensures full name is between 3 and 50 characters
   email: z
     .string()
     .email("Invalid email format. Please enter a valid email address."), // Validates email format

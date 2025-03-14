@@ -44,8 +44,8 @@ export const WorkExperienceForm = ({
 
         <InputField
           important={false}
-          label="Location"
-          name="location"
+          label="Office Location"
+          name="officeLocation"
           register={register}
           error={errors?.location}
           placeholder="e.g., San Francisco CA or remote"

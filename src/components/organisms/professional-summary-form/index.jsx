@@ -2,7 +2,7 @@ import { TextAreaField } from "../../atoms";
 
 export const ProfessionalSummaryForm = ({ register, errors }) => (
   <TextAreaField
-    important={true}
+    // important={true}
     label="Summary"
     name="summary"
     register={register}
