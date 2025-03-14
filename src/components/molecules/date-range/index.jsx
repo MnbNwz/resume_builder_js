@@ -32,14 +32,14 @@ export const DateRange = ({ register, errors, isEndDateDisabled }) => {
         disabledError={isEndDateDisabled} // Disable field if condition is true
       />
 
-      <div className="flex items-center col-span-2">
+      {/* <div className="flex items-center col-span-2">
         <CheckboxWithLabel
           isChecked={isEndDateDisabled}
           id="disabledEndDate" // ID for the checkbox
           label={FORM_REGISTER_CONSTANTS.currentWorkingDateCheckBox.label} // Label text for the checkbox
           register={register} // Register the checkbox field
         />
-      </div>
+      </div> */}
     </div>
   );
 };

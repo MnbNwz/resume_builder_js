@@ -7,29 +7,13 @@ import { useMemo } from "react";
 export const WorkExperienceForm = ({
   register,
   errors,
-  control,
   fields,
-  append,
   remove,
-  trigger,
-  watch,
-  getValues,
-  setValue,
   handleChange,
+  isEndDateDisabled,
+  validateContributionInput,
 }) => {
   const fieldArrayFields = useMemo(() => fields, [fields]);
-  const isEndDateDisabled = watch("disabledEndDate");
-
-  const validateContributionInput = async () => {
-    const result = await trigger("contributionInput");
-    if (result) {
-      const contributionText = getValues("contributionInput");
-      append({ value: contributionText });
-      setValue("contributionInput", "");
-    } else {
-      console.log("Contribution Input validation failed");
-    }
-  };
 
   return (
     <div className="flex flex-col space-y-4 p-4 rounded-md border border-gray-300">
@@ -77,11 +61,11 @@ export const WorkExperienceForm = ({
               <div key={index}>
                 <div className="flex items-center w-full">
                   <div className="flex-1">
-                    <InputField
+                    <input
                       {...register(`contributions.${index}.value`)}
-                      important={false}
+                      // important={false}
                       name={`contributions.${index}.value`}
-                      register={register}
+                      // register={register}
                       placeholder="Describe a contribution..."
                       className="border border-gray-300 p-2 w-full text-black text-sm placeholder-gray-400 pr-10 rounded-md focus:border-black focus:outline-none focus:ring-1 focus:ring-gray-400 transition duration-150"
                       disabled={false}
@@ -134,12 +118,12 @@ export const WorkExperienceForm = ({
           {APP_CONSTANTS.addContribution}
         </Button>
       </div>
-
+      {/* 
       <div className="w-full flex  justify-center ">
         <button className="w-2xl" type="submit">
           {APP_CONSTANTS.submit}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

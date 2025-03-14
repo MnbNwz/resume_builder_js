@@ -22,12 +22,13 @@ export const workExperienceSchema = z.object({
         value: z.string().min(8, "Contribution must be at least 8 characters"),
       })
     )
-    .min(1, "At least one contribution is required"),
+    .min(1, "At least one contribution is required")
+    .optional(),
   contributionInput: z
     .string()
-    .min(8, "Contribution must be at least 8 characters")
+    .min(8, "Contribution text must be at least 8 characters")
     .optional(),
-  disabledEndDate: z.boolean().optional(), // Optionally disables end date
+  disabledEndDate: z.boolean(), // Optionally disables end date
 });
 
 // Professional Summary Schema Validation
