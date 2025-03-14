@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function LivePreview({ methods }) {
+export function LivePreview({ methods }) {
   const [values, setValues] = useState(methods.getValues()); // Initial form values
 
   useEffect(() => {
@@ -31,10 +31,8 @@ function LivePreview({ methods }) {
 
   return (
     <>
-      <h2>Live Preview (Updated every 1 second)</h2>
+      <h2 className="text-black">Live Preview </h2>
       <pre className="text-black">{JSON.stringify(values, null, 2)}</pre>
     </>
   );
 }
-
-export default LivePreview;

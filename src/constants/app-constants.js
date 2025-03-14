@@ -6,7 +6,9 @@ export const APP_CONSTANTS = {
   contributions: "Contributions",
   addContribution: "Add Contribution",
   submit: "Submit",
-  addWorkExperience: "Add  WorkExperience",
+  addWorkExperienceButton: "Add Work Experience",
+
+  addWorkExperience: "Add WorkExperience",
 };
 export const FORM_REGISTER_CONSTANTS = {
   startDate: {

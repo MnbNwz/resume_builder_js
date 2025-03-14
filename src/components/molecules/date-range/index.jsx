@@ -7,7 +7,7 @@ import {
 } from "../../../constants/app-constants";
 import { CheckboxWithLabel } from "../checkbox-label";
 
-export const DateRange = ({ register, errors, isEndDateDisabled }) => {
+export const DateRange = ({ register, errors, isEndDateDisabled = false }) => {
   return (
     <div className="grid grid-cols-2 gap-4">
       <InputField

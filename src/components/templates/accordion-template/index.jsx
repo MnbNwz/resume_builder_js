@@ -1,8 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaChevronUp } from "react-icons/fa";
 
-export const AccordionTemplate = ({ title, children }) => {
-  const [isOpen, setIsOpen] = useState(true);
+export const AccordionTemplate = ({
+  title,
+  defaultAccordionOff = false,
+  children,
+}) => {
+  const [isOpen, setIsOpen] = useState(defaultAccordionOff ? false : true);
   const contentRef = useRef(null);
   const [height, setHeight] = useState("0px");
 

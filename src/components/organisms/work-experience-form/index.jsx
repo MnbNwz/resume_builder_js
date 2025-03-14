@@ -12,6 +12,7 @@ export const WorkExperienceForm = ({
   handleChange,
   isEndDateDisabled,
   validateContributionInput,
+  pushingWorkExperience,
 }) => {
   const fieldArrayFields = useMemo(() => fields, [fields]);
 
@@ -108,7 +109,7 @@ export const WorkExperienceForm = ({
         </div>
       </div>
 
-      <div className="bg-white mb-12">
+      <div className="bg-white mb-6">
         <Button
           type="button"
           onClick={validateContributionInput}
@@ -118,12 +119,12 @@ export const WorkExperienceForm = ({
           {APP_CONSTANTS.addContribution}
         </Button>
       </div>
-      {/* 
-      <div className="w-full flex  justify-center ">
-        <button className="w-2xl" type="submit">
-          {APP_CONSTANTS.submit}
+
+      <div className="w-full flex justify-center ">
+        <button type="button" onClick={pushingWorkExperience} className="w-1xl">
+          {APP_CONSTANTS.addWorkExperienceButton}
         </button>
-      </div> */}
+      </div>
     </div>
   );
 };
