@@ -57,6 +57,9 @@ const ResumeProvider = ({ children }) => {
     []
     // dummyWorkExperienceData
   );
+  const [specificWorkExperience, setSpecificWorkExperience] = useState([]);
+
+  console.log("specificWorkExperience", specificWorkExperience);
 
   return (
     <ResumeContext.Provider
@@ -65,6 +68,7 @@ const ResumeProvider = ({ children }) => {
         setResumeData,
         workExperienceForms,
         setWorkExperienceForms,
+        setSpecificWorkExperience,
       }}
     >
       {children}

@@ -21,6 +21,7 @@ export const MainForm = () => {
     setResumeData,
     workExperienceForms,
     setWorkExperienceForms,
+    setSpecificWorkExperience,
   } = useContext(ResumeContext);
 
   const {
@@ -107,7 +108,10 @@ export const MainForm = () => {
   return (
     <>
       {workExperienceForms && workExperienceForms.length > 0 && (
-        <AllExperiencePage workExperienceForms={workExperienceForms} />
+        <AllExperiencePage
+          setSpecificWorkExperience={setSpecificWorkExperience}
+          workExperienceForms={workExperienceForms}
+        />
       )}
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <AccordionTemplate title={APP_CONSTANTS.personalInformation}>
