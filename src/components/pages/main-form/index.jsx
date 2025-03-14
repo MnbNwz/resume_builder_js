@@ -110,12 +110,12 @@ export const MainForm = () => {
         <AllExperiencePage workExperienceForms={workExperienceForms} />
       )}
       <form onSubmit={handleSubmit(onSubmit, onError)}>
-        {/* <AccordionTemplate title={APP_CONSTANTS.personalInformation}>
-        <PersonalInformationForm register={register} errors={errors} />
-      </AccordionTemplate>
-      <AccordionTemplate title={APP_CONSTANTS.professionalSummary}>
-        <ProfessionalSummaryForm register={register} errors={errors} />
-      </AccordionTemplate> */}
+        <AccordionTemplate title={APP_CONSTANTS.personalInformation}>
+          <PersonalInformationForm register={register} errors={errors} />
+        </AccordionTemplate>
+        <AccordionTemplate title={APP_CONSTANTS.professionalSummary}>
+          <ProfessionalSummaryForm register={register} errors={errors} />
+        </AccordionTemplate>
         <AccordionTemplate title={APP_CONSTANTS.workExperience}>
           <WorkExperienceForm
             register={register}
